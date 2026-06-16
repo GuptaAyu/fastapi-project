@@ -10,9 +10,9 @@ services:
       - API_KEY=demo-key
       - JWT_SECRET_KEY=secret
       - REDIS_URL=redis://redis:6379
-    depends on:
+    depends_on:
       - redis
-      - peometheus
+      - prometheus
     networks:
       - backend
 
@@ -32,11 +32,11 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - backend       
+      - backend
 
   grafana:
     image: grafana/grafana:latest
-    conyainer_name: grafana1
+    container_name: grafana1
     ports:
       - "3000:3000"
     depends_on:
@@ -46,4 +46,4 @@ services:
 
 networks:
   backend:
-    driner: bridge
+    driver: bridge

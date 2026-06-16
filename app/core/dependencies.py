@@ -8,8 +8,8 @@ def get_api_key(api_key: str = Header(...)):
         raise HTTPException(status_code=403,detail='Invalid API KEY')
     
 
-    def get_current_user(token: str = Header(...)):
-        payload = verify_token(token)
-        if not payload:
-            raise HTTPException(status_code=401,detail='Invalid JWT token')
-        return payload
+def get_current_user(token: str = Header(...)):
+    payload = verify_token(token)
+    if not payload:
+        raise HTTPException(status_code=401,detail='Invalid JWT token')
+    return payload
