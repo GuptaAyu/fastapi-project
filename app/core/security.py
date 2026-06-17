@@ -5,7 +5,7 @@ from app.core.config import settings
 
 def create_token(data: dict, expire_minutes=30):
     to_encode = data.copy()
-    expire = datatime.now(timezone.utc) + timedelta(minute=expire_minutes)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=expire_minutes)
     to_encode.update({'exp' : expire})
     return jwt.encode(
         to_encode,
@@ -16,7 +16,8 @@ def create_token(data: dict, expire_minutes=30):
 def verify_token(token: str):
     try:
         payload = jwt.decode(
-            token, settings.JWT_SECRET_KEY, algorithm= [settings.JWT_ALGORITHM]
+            token, settings.JWT_SECRET_KEY, algorithms= [settings.JWT_ALGORITHM]
         )
+        return payload 
     except JWTError:
         return None
